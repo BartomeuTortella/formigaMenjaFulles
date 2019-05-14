@@ -13,25 +13,16 @@ import javax.swing.JFrame;
  */
 public class FormigaMenjaFulles extends JFrame {
 
+    private Tauler tauler;
+
     public FormigaMenjaFulles() {
-        this.setTitle("Formiga menja fulles");
-        this.setSize(700, 700);
+        super("Formiga menja fulles");
+        tauler = new Tauler();
+        this.getContentPane().add(tauler);
+        this.setSize(tauler.getPreferredSize());
+        this.pack();
         this.setResizable(false);
-        initComponents();
-    }
-
-    private void initComponents() {
-        addWindowListener(new java.awt.event.WindowAdapter() {
-
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                exitForm(evt);
-            }
-        });
-    }
-
-    private void exitForm(java.awt.event.WindowEvent evt) {
-        System.exit(0);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
