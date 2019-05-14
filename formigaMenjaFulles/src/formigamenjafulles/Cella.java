@@ -9,10 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -23,7 +19,6 @@ public class Cella {
     private boolean teFulla;
     private boolean teFormiga;
     private Figura figura;
-    private BufferedImage imatge;
     private Rectangle2D.Float rectangle;
     private Color color;
 
@@ -37,15 +32,11 @@ public class Cella {
             Formiga formigaTmp = (Formiga) figura;
             formigaTmp.canviarDireccióFormiga();
         } else if (teFulla && (figura instanceof Fulla)) {
-            this.figura.setImatge("img/hoja.png");
+            this.figura.setFitxerImatge("img/hoja.png");
         } else {
             this.figura = new Figura("img/nada.png");
         }
-        try {
-            imatge = ImageIO.read(new File(this.figura.getImatge()));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     public void paintComponent(Graphics g) {

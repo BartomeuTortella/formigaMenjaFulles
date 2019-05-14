@@ -16,6 +16,6 @@ public class Formiga extends Figura {
     }
 
     public void canviarDireccióFormiga() {
-        
+
     }
 }
