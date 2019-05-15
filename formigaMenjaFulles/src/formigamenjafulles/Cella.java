@@ -20,11 +20,10 @@ public class Cella {
     private boolean teFormiga;
     private Figura figura;
     private Rectangle2D.Float rectangle;
-    private Color color;
 
-    public Cella(Rectangle2D.Float r, Color color) {
+    public Cella(Rectangle2D.Float r) {
         this.rectangle = r;
-        this.color = color;
+        this.figura = new Fulla();
     }
 
     private void canviarImatge() {
@@ -41,8 +40,8 @@ public class Cella {
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.color);
         g2d.fill(this.rectangle);
+        this.figura.paintComponent(g, this.rectangle.x, this.rectangle.y);
 
     }
 }

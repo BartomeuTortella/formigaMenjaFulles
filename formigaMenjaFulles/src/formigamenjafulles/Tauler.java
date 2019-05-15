@@ -17,9 +17,8 @@ import javax.swing.JPanel;
  */
 public class Tauler extends JPanel {
 
-    private static final int DIMENSIO = 20;
-    private static final int MAXIM = 800;
-    private static final int COSTAT = MAXIM / DIMENSIO;
+    private static final int MAXIM = 1000;
+    private static final int COSTAT = 50;
 
     private Cella[][] tauler;
 
@@ -37,7 +36,7 @@ public class Tauler extends JPanel {
                 } else {
                     color = Color.BLACK;
                 }
-                tauler[i][j] = new Cella(casella, color);
+                tauler[i][j] = new Cella(casella);
 
             }
             y += COSTAT;
@@ -46,9 +45,9 @@ public class Tauler extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        for (int i = 0; i < tauler.length; i++) {
-            for (int j = 0; j < tauler[i].length; j++) {
-                tauler[i][j].paintComponent(g);
+        for (Cella[] tauler1 : tauler) {
+            for (Cella tauler11 : tauler1) {
+                tauler11.paintComponent(g);
             }
         }
     }

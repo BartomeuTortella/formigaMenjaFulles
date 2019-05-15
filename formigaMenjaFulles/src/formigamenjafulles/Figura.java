@@ -25,7 +25,7 @@ public class Figura {
         try {
             imatge = ImageIO.read(new File(fitxerImatge));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 

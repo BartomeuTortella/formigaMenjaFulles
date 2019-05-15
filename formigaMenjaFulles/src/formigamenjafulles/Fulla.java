@@ -12,7 +12,7 @@ package formigamenjafulles;
 public class Fulla extends Figura {
 
     public Fulla() {
-        super("img/hoja.pg");
+        super("img/hoja.png");
     }
 
 }
