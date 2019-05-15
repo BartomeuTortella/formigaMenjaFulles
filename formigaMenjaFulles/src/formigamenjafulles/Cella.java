@@ -17,23 +17,12 @@ import java.awt.geom.Rectangle2D;
 public class Cella {
 
     private boolean teFulla;
-    private boolean teFormiga;
     private Figura figura;
     private Rectangle2D.Float rectangle;
 
     public Cella(Rectangle2D.Float r, Figura figura) {
         this.rectangle = r;
         this.figura = figura;
-    }
-
-    private void canviarImatge() {
-        if (teFormiga && (figura instanceof Formiga)) {
-            Formiga formigaTmp = (Formiga) figura;
-        } else if (teFulla && (figura instanceof Fulla)) {
-            this.figura.setFitxerImatge("img/hoja.png");
-        } else {
-            this.figura = new Figura("img/nada.png");
-        }
     }
 
     public void paintComponent(Graphics g) {

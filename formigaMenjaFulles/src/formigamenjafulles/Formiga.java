@@ -9,33 +9,50 @@ package formigamenjafulles;
  *
  * @author bartomeu
  */
+enum Direccio {
+    SUD, NORT, EST, OEST
+}
+
 public class Formiga extends Figura {
 
     private int posicioX;
     private int posicioY;
+    private Direccio direccio;
 
-    public Formiga() {
+    public Formiga(int posicioX, int posicioY) {
         super("img/hormiga_s.png");
-        this.posicioX = 0;
-        this.posicioY = 0;
+        direccio = Direccio.SUD;
+        this.posicioX = posicioX;
+        this.posicioY = posicioY;
     }
 
     public void canviarDireccióFormiga(String direccio) {
         switch (direccio) {
             case "amunt":
                 super.setFitxerImatge("img/hormiga_n.png");
-                
+                this.direccio = Direccio.NORT;
                 break;
             case "abaix":
                 super.setFitxerImatge("img/hormiga_s.png");
+                this.direccio = Direccio.SUD;
                 break;
             case "dreta":
                 super.setFitxerImatge("img/hormiga_e.png");
+                this.direccio = Direccio.EST;
                 break;
             case "esquerra":
                 super.setFitxerImatge("img/hormiga_o.png");
+                this.direccio = Direccio.OEST;
                 break;
         }
+    }
+
+    public Direccio getDireccio() {
+        return direccio;
+    }
+
+    public void setDireccio(Direccio direccio) {
+        this.direccio = direccio;
     }
 
     public int getPosicioX() {

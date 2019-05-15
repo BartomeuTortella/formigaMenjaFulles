@@ -24,12 +24,46 @@ public class Tauler extends JPanel implements KeyListener {
     int randomX = ThreadLocalRandom.current().nextInt(0, 20);
     int randomY = ThreadLocalRandom.current().nextInt(0, 20);
     private Cella[][] tauler;
-    private Formiga formiga = new Formiga();
+    private Formiga formiga = new Formiga(randomX, randomY);
 
     public Tauler() {
         this.tauler = new Cella[20][20];
         this.setFocusable(true);
         this.addKeyListener(this);
+        calcularTauler();
+    }
+
+    public void avancarFormiga() {
+        String direccio = this.formiga.getDireccio().toString();
+        int posicioX = this.formiga.getPosicioX();
+        int posicioY = this.formiga.getPosicioY();
+
+        switch (direccio) {
+            case "NORT":
+                if (posicioX > 0) {
+                    this.formiga.setPosicioX(posicioX - 1);
+                }
+                break;
+            case "EST":
+                if (posicioY < 19) {
+                    this.formiga.setPosicioY(posicioY + 1);
+                }
+                break;
+            case "SUD":
+                if (posicioX < 19) {
+                    this.formiga.setPosicioX(posicioX + 1);
+                }
+                break;
+            case "OEST":
+                if (posicioY > 0) {
+                    this.formiga.setPosicioY(posicioY - 1);
+                }
+                break;
+        }
+        calcularTauler();
+    }
+
+    private void calcularTauler() {
         int y = 0;
         for (int i = 0; i < this.tauler.length; i++) {
             int x = 0;
@@ -37,7 +71,7 @@ public class Tauler extends JPanel implements KeyListener {
                 Rectangle2D.Float casella = new Rectangle2D.Float(x, y, COSTAT, COSTAT);
                 x += COSTAT;
                 Figura figura;
-                if (i == randomX && j == randomY) {
+                if (i == formiga.getPosicioX() && j == formiga.getPosicioY()) {
                     figura = formiga;
                     formiga.setPosicioX(i);
                     formiga.setPosicioY(j);
@@ -50,10 +84,6 @@ public class Tauler extends JPanel implements KeyListener {
             }
             y += COSTAT;
         }
-    }
-
-    public void moureFormiga() {
-
     }
 
     @Override
@@ -82,10 +112,12 @@ public class Tauler extends JPanel implements KeyListener {
                 break;
             case 39:
                 formiga.canviarDireccióFormiga("dreta");
-
                 break;
             case 40:
                 formiga.canviarDireccióFormiga("abaix");
+                break;
+            case 32:
+                avancarFormiga();
                 break;
         }
         this.repaint();
