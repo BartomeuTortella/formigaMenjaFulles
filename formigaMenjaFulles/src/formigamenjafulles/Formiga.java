@@ -20,8 +20,22 @@ public class Formiga extends Figura {
         this.posicioY = 0;
     }
 
-    public void canviarDireccióFormiga() {
-
+    public void canviarDireccióFormiga(String direccio) {
+        switch (direccio) {
+            case "amunt":
+                super.setFitxerImatge("img/hormiga_n.png");
+                
+                break;
+            case "abaix":
+                super.setFitxerImatge("img/hormiga_s.png");
+                break;
+            case "dreta":
+                super.setFitxerImatge("img/hormiga_e.png");
+                break;
+            case "esquerra":
+                super.setFitxerImatge("img/hormiga_o.png");
+                break;
+        }
     }
 
     public int getPosicioX() {

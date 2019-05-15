@@ -22,11 +22,7 @@ public class Figura {
 
     public Figura(String fitxerImatge) {
         this.fitxerImatge = fitxerImatge;
-        try {
-            imatge = ImageIO.read(new File(fitxerImatge));
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        this.imatge = agafarImatge();
     }
 
     public String getFitxerImatge() {
@@ -35,10 +31,22 @@ public class Figura {
 
     public void setFitxerImatge(String fitxerImatge) {
         this.fitxerImatge = fitxerImatge;
+        this.imatge = agafarImatge();
+
     }
 
     void paintComponent(Graphics g, float x, float y) {
         g.drawImage(imatge, (int) x + 10, (int) y + 10, null);
+    }
+
+    private BufferedImage agafarImatge() {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(fitxerImatge));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return img;
     }
 
 }

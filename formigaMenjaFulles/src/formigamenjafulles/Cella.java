@@ -21,27 +21,22 @@ public class Cella {
     private Figura figura;
     private Rectangle2D.Float rectangle;
 
-    public Cella(Rectangle2D.Float r) {
+    public Cella(Rectangle2D.Float r, Figura figura) {
         this.rectangle = r;
-        this.figura = new Fulla();
+        this.figura = figura;
     }
 
     private void canviarImatge() {
         if (teFormiga && (figura instanceof Formiga)) {
             Formiga formigaTmp = (Formiga) figura;
-            formigaTmp.canviarDireccióFormiga();
         } else if (teFulla && (figura instanceof Fulla)) {
             this.figura.setFitxerImatge("img/hoja.png");
         } else {
             this.figura = new Figura("img/nada.png");
         }
-
     }
 
     public void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.fill(this.rectangle);
         this.figura.paintComponent(g, this.rectangle.x, this.rectangle.y);
-
     }
 }

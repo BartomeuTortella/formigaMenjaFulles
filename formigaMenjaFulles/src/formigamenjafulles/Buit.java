@@ -9,10 +9,10 @@ package formigamenjafulles;
  *
  * @author bartomeu
  */
-public class Fulla extends Figura {
+public class Buit extends Figura {
 
-    public Fulla() {
-        super("img/hoja.png");
+    public Buit() {
+        super("img/nada.png");
     }
-    
+
 }

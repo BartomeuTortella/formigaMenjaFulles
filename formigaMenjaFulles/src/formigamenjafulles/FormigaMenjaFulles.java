@@ -32,5 +32,4 @@ public class FormigaMenjaFulles extends JFrame {
         new FormigaMenjaFulles().setVisible(true);
 
     }
-
 }
