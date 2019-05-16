@@ -15,6 +15,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -75,8 +77,15 @@ public class Tauler extends JPanel implements KeyListener {
     }
 
     private void aturarExecució() {
-        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
-
+        int input = JOptionPane
+                .showOptionDialog(null,
+                        "ENHORABONA\n" + " ¡¡¡has completat el joc!!!\n" + " LA FORMIGA S'HA MENJAT TOTES LES FULLES",
+                        "Has completat el joc",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        if (input == 0) {
+            System.exit(0);
+        }
     }
 
     private void inicialitzarTauler() {
@@ -176,12 +185,13 @@ public class Tauler extends JPanel implements KeyListener {
                 break;
             case 32:
                 avancarFormiga();
-                if (this.contadorFulles == 2) {
-                    aturarExecució();
-                }
+
                 break;
         }
         this.repaint();
+        if (this.contadorFulles == 400) {
+            aturarExecució();
+        }
     }
 
     @Override
