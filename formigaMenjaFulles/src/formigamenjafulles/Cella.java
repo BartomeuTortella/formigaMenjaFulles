@@ -5,9 +5,7 @@
  */
 package formigamenjafulles;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -16,41 +14,44 @@ import java.awt.geom.Rectangle2D;
  */
 public class Cella {
 
+    //declaracions de variables
+    //declaració de teFulla que es un boolea per poder comprovar si s'ha de pintar un buit o una fulla
     private boolean teFulla;
+    //variable figura de la classe Figura
     private Figura figura;
-    private Rectangle2D.Float rectangle;
+    //declaraicó del rectangle de la cel·la i es final ja que no s'ha de modificar
+    private final Rectangle2D.Float rectangle;
 
     public Cella(Rectangle2D.Float r, Figura figura) {
+        //inicialitzam el rectangle 
         this.rectangle = r;
+        //inicialitzam la figura
         this.figura = figura;
     }
 
     public void paintComponent(Graphics g) {
+        //metode per pintar el component i crida al paintComponent de la figura
         this.figura.paintComponent(g, this.rectangle.x, this.rectangle.y);
     }
 
     public boolean TeFulla() {
+        //metode que ens mira si la cel·la té fulla o no
         return teFulla;
     }
 
     public void setTeFulla(boolean teFulla) {
+        //metode per poder posar si una cel·la ha de tenir fulla o no
         this.teFulla = teFulla;
     }
 
     public Figura getFigura() {
+        //metode que retorna la figura de la cel·la
         return figura;
     }
 
     public void setFigura(Figura figura) {
+        //metode per poder canviar la figura de la cel·la
         this.figura = figura;
-    }
-
-    public Rectangle2D.Float getRectangle() {
-        return rectangle;
-    }
-
-    public void setRectangle(Rectangle2D.Float rectangle) {
-        this.rectangle = rectangle;
     }
 
 }

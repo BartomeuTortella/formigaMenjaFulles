@@ -9,9 +9,12 @@ package formigamenjafulles;
  *
  * @author bartomeu
  */
+
+//classe Buit que exten de la classe Figura
 public class Buit extends Figura {
 
     public Buit() {
+        //constructor que simplement passa a la classe figura la imatge de buit
         super("img/nada.png");
     }
 
