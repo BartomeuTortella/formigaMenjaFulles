@@ -23,6 +23,7 @@ public class FormigaMenjaFulles extends JFrame {
         this.pack();
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
 
     /**

@@ -28,4 +28,29 @@ public class Cella {
     public void paintComponent(Graphics g) {
         this.figura.paintComponent(g, this.rectangle.x, this.rectangle.y);
     }
+
+    public boolean TeFulla() {
+        return teFulla;
+    }
+
+    public void setTeFulla(boolean teFulla) {
+        this.teFulla = teFulla;
+    }
+
+    public Figura getFigura() {
+        return figura;
+    }
+
+    public void setFigura(Figura figura) {
+        this.figura = figura;
+    }
+
+    public Rectangle2D.Float getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle2D.Float rectangle) {
+        this.rectangle = rectangle;
+    }
+
 }

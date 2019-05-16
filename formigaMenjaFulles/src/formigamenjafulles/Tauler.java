@@ -12,6 +12,10 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,16 +25,18 @@ public class Tauler extends JPanel implements KeyListener {
 
     private static final int MAXIM = 820;
     private static final int COSTAT = 40;
-    int randomX = ThreadLocalRandom.current().nextInt(0, 20);
-    int randomY = ThreadLocalRandom.current().nextInt(0, 20);
+    private int randomX = ThreadLocalRandom.current().nextInt(0, 20);
+    private int randomY = ThreadLocalRandom.current().nextInt(0, 20);
     private Cella[][] tauler;
+    private int contadorFulles;
     private Formiga formiga = new Formiga(randomX, randomY);
 
     public Tauler() {
         this.tauler = new Cella[20][20];
+        contadorFulles = 0;
         this.setFocusable(true);
         this.addKeyListener(this);
-        calcularTauler();
+        inicialitzarTauler();
     }
 
     public void avancarFormiga() {
@@ -42,28 +48,38 @@ public class Tauler extends JPanel implements KeyListener {
             case "NORT":
                 if (posicioX > 0) {
                     this.formiga.setPosicioX(posicioX - 1);
+                    this.tauler[posicioX][posicioY].setTeFulla(false);
                 }
                 break;
             case "EST":
                 if (posicioY < 19) {
                     this.formiga.setPosicioY(posicioY + 1);
+                    this.tauler[posicioX][posicioY].setTeFulla(false);
                 }
                 break;
             case "SUD":
                 if (posicioX < 19) {
                     this.formiga.setPosicioX(posicioX + 1);
+                    this.tauler[posicioX][posicioY].setTeFulla(false);
                 }
                 break;
             case "OEST":
                 if (posicioY > 0) {
                     this.formiga.setPosicioY(posicioY - 1);
+                    this.tauler[posicioX][posicioY].setTeFulla(false);
                 }
                 break;
         }
-        calcularTauler();
+        recalcularTauler();
+
     }
 
-    private void calcularTauler() {
+    private void aturarExecució() {
+        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+
+    }
+
+    private void inicialitzarTauler() {
         int y = 0;
         for (int i = 0; i < this.tauler.length; i++) {
             int x = 0;
@@ -79,11 +95,52 @@ public class Tauler extends JPanel implements KeyListener {
                 } else {
                     figura = new Fulla();
                     tauler[i][j] = new Cella(casella, figura);
+                    tauler[i][j].setTeFulla(true);
                 }
 
             }
             y += COSTAT;
         }
+    }
+
+    private void recalcularTauler() {
+        int y = 0;
+        for (int i = 0; i < this.tauler.length; i++) {
+            int x = 0;
+            for (int j = 0; j < this.tauler[i].length; j++) {
+                Rectangle2D.Float casella = new Rectangle2D.Float(x, y, COSTAT, COSTAT);
+                x += COSTAT;
+                Figura figura;
+                if (i == formiga.getPosicioX() && j == formiga.getPosicioY()) {
+                    figura = formiga;
+                    formiga.setPosicioX(i);
+                    formiga.setPosicioY(j);
+                    tauler[i][j] = new Cella(casella, figura);
+                } else if (tauler[i][j].TeFulla()) {
+                    figura = new Fulla();
+                    tauler[i][j] = new Cella(casella, figura);
+                    tauler[i][j].setTeFulla(true);
+                } else {
+                    figura = new Buit();
+                    tauler[i][j] = new Cella(casella, figura);
+                }
+
+            }
+            y += COSTAT;
+        }
+        this.contadorFulles = getNumFullesMenjades();
+    }
+
+    private int getNumFullesMenjades() {
+        int numFullesMenjades = 0;
+        for (int i = 0; i < this.tauler.length; i++) {
+            for (int j = 0; j < this.tauler[i].length; j++) {
+                if (!tauler[i][j].TeFulla()) {
+                    numFullesMenjades++;
+                }
+            }
+        }
+        return numFullesMenjades;
     }
 
     @Override
@@ -101,7 +158,8 @@ public class Tauler extends JPanel implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e
+    ) {
         int key = e.getKeyCode();
         switch (key) {
             case 37:
@@ -118,18 +176,23 @@ public class Tauler extends JPanel implements KeyListener {
                 break;
             case 32:
                 avancarFormiga();
+                if (this.contadorFulles == 2) {
+                    aturarExecució();
+                }
                 break;
         }
         this.repaint();
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e
+    ) {
         //no s'utilitza
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e
+    ) {
         //no s'utilitza
     }
 
